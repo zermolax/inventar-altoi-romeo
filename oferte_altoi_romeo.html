@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oferta Ramuri Altoi 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --earth-dark: #3d3d2d;
+            --earth-medium: #5a5a47;
+            --earth-light: #8b8b78;
+            --garden-green: #6b8e23;
+            --garden-light: #a4b494;
+            --garden-fresh: #7cb342;
+            --cream: #f5f1e8;
+            --white: #fafaf8;
+            --accent: #d4a574;
+            --border: #ddd4c4;
+            --success: #6b8e23;
+            --warning: #d97706;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f1e8 0%, #e8e4d6 100%);
+            color: var(--earth-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, var(--earth-dark) 0%, var(--earth-medium) 100%);
+            color: var(--cream);
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-bottom: 4px solid var(--garden-fresh);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 0.95rem;
+            opacity: 0.95;
+            max-width: 900px;
+            margin: 0.5rem auto;
+            line-height: 1.5;
+        }
+
+        .header-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .info-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            border-left: 3px solid var(--garden-fresh);
+        }
+
+        .info-item strong {
+            color: var(--accent);
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* FILTER SECTION */
+        .filter-section {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 2px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .filter-label {
+            display: block;
+            font-weight: 600;
+            color: var(--earth-dark);
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .filter-dropdown {
+            display: none;
+        }
+
+        .filter-dropdown-select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--garden-light);
+            border-radius: 25px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--earth-dark);
+            background: var(--white);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-dropdown-select:hover,
+        .filter-dropdown-select:focus {
+            border-color: var(--garden-fresh);
+            box-shadow: 0 0 8px rgba(107, 142, 35, 0.2);
+            outline: none;
+        }
+
+        .filter-btn {
+            padding: 0.6rem 1.2rem;
+            border: 2px solid var(--garden-light);
+            background: var(--white);
+            color: var(--earth-dark);
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            background: var(--garden-light);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: var(--garden-fresh);
+            color: var(--white);
+            border-color: var(--garden-fresh);
+            box-shadow: 0 4px 10px rgba(107, 142, 35, 0.3);
+        }
+
+        /* CATEGORY SECTIONS */
+        .categories-container {
+            display: grid;
+            gap: 2.5rem;
+        }
+
+        .category {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .category.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--garden-fresh);
+        }
+
+        .category-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--garden-green), var(--garden-fresh));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .category-header h2 {
+            font-size: 1.8rem;
+            color: var(--earth-dark);
+            font-weight: 700;
+            text-transform: capitalize;
+        }
+
+        .variety-count {
+            margin-left: auto;
+            background: var(--garden-light);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* VARIETIES GRID */
+        .varieties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .variety-card {
+            background: var(--white);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .variety-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--garden-green), var(--garden-fresh));
+        }
+
+        .variety-card:hover {
+            border-color: var(--garden-light);
+            box-shadow: 0 6px 16px rgba(107, 142, 35, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .variety-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--earth-dark);
+            margin-bottom: 0.8rem;
+            word-break: break-word;
+        }
+
+        .variety-price {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--garden-fresh);
+            margin-bottom: 0.5rem;
+        }
+
+        .variety-price-unit {
+            font-size: 0.75rem;
+            color: var(--earth-light);
+            font-weight: 400;
+            display: block;
+            margin-top: 0.25rem;
+        }
+
+        .stock-limited {
+            display: inline-block;
+            background: var(--warning);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--earth-dark);
+            color: var(--cream);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            border-top: 4px solid var(--garden-fresh);
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .footer-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .footer-section p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .header-info {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .varieties-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-buttons {
+                display: none;
+            }
+
+            .filter-dropdown {
+                display: block;
+            }
+
+            .filter-dropdown-select {
+                padding: 0.8rem;
+                font-size: 0.95rem;
+            }
+
+            .category-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .variety-count {
+                margin-left: 0;
+            }
+        }
+
+        /* EMPTY STATE */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            color: var(--earth-light);
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🌿 Oferta Ramuri Altoi 2026</h1>
+        <p>Sortimente de mare calitate pentru înmulțire horticolă — Altoi standard cu 6-7 muguri, lungime 30-40 cm</p>
+        <div class="header-info">
+            <div class="info-item">
+                <strong>💰 Preț</strong>
+                Afișat per ramură
+            </div>
+            <div class="info-item">
+                <strong>📦 Comandă minimă</strong>
+                100 lei
+            </div>
+            <div class="info-item">
+                <strong>🚚 Transport</strong>
+                DPD Curier 20 lei (primii 3 kg)
+            </div>
+            <div class="info-item">
+                <strong>⚠️ Stock</strong>
+                Limitat la unele soiuri (2-3 bucăți)
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="filter-section">
+            <label class="filter-label">🎯 Filtrează după categoria de fruct:</label>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-category="all">Toate</button>
+                <button class="filter-btn" data-category="păr">Păr</button>
+                <button class="filter-btn" data-category="mere">Mere</button>
+                <button class="filter-btn" data-category="prun">Prun</button>
+                <button class="filter-btn" data-category="cireș">Cireș</button>
+                <button class="filter-btn" data-category="dud">Dud</button>
+                <button class="filter-btn" data-category="cais">Cais</button>
+                <button class="filter-btn" data-category="piersic">Piersic</button>
+                <button class="filter-btn" data-category="migdal">Migdal</button>
+                <button class="filter-btn" data-category="gutui">Gutui</button>
+                <button class="filter-btn" data-category="musmon">Musmon</button>
+            </div>
+            <div class="filter-dropdown">
+                <select class="filter-dropdown-select" id="categorySelect">
+                    <option value="all">🎯 Toate categoriile</option>
+                    <option value="păr">🍐 Păr</option>
+                    <option value="mere">🍎 Mere</option>
+                    <option value="prun">🫐 Prun</option>
+                    <option value="cireș">🍒 Cireș</option>
+                    <option value="dud">🫘 Dud</option>
+                    <option value="cais">🧡 Cais</option>
+                    <option value="piersic">🍑 Piersic</option>
+                    <option value="migdal">🌰 Migdal</option>
+                    <option value="gutui">💛 Gutui</option>
+                    <option value="musmon">⚪ Musmon</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="categories-container" id="categoriesContainer"></div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>📋 Informații Comandă</h3>
+                <p>Comanda minimă: <strong>100 lei</strong> | Transport DPD: <strong>20 lei (primii 3 kg)</strong></p>
+            </div>
+            <div class="footer-section">
+                <h3>⚠️ Important</h3>
+                <p>La unele soiuri stocul este limitat (2-3 ramuri altoi). Verificați disponibilitatea înainte de a comanda.</p>
+            </div>
+            <div class="footer-section">
+                <p style="font-size: 0.85rem; margin-top: 1rem; opacity: 0.7;">© 2026 Oferta Ramuri Altoi | Toate drepturile rezervate</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DATE
+        const data = {
+            păr: [
+                { name: 'Allora', price: 15, limited: false },
+                { name: 'Abate Fetele', price: 10, limited: false },
+                { name: 'Auguste Griveau', price: 15, limited: false },
+                { name: 'Belle Angevine', price: 12, limited: false },
+                { name: 'Benita', price: 15, limited: false },
+                { name: 'Beurré Alecon', price: 15, limited: false },
+                { name: 'Beurré de Naghin', price: 15, limited: false },
+                { name: 'Beurre D\'Avril', price: 15, limited: false },
+                { name: 'Beurre Dilova', price: 15, limited: false },
+                { name: 'Beurre Dumontier', price: 15, limited: false },
+                { name: 'Beurre Superfin', price: 12, limited: false },
+                { name: 'Bishop\'s Thumb', price: 12, limited: false },
+                { name: 'Blanka', price: 15, limited: false },
+                { name: 'Capul Piscului Maro', price: 8, limited: false },
+                { name: 'Chojuro (Asian Pear)', price: 15, limited: false },
+                { name: 'Citronova (Hib.)', price: 15, limited: false },
+                { name: 'Conference', price: 10, limited: false },
+                { name: 'Concord', price: 15, limited: false },
+                { name: 'Cordon de primăvară', price: 10, limited: false },
+                { name: 'Cure', price: 5, limited: false },
+                { name: 'Daciana', price: 8, limited: false },
+                { name: 'David', price: 20, limited: false },
+                { name: 'Delbard Gourmande', price: 20, limited: false },
+                { name: 'Delbard Early', price: 15, limited: false },
+                { name: 'Deveci', price: 18, limited: false },
+                { name: 'Gerber Hut', price: 15, limited: false },
+                { name: 'Hosui (Asian Pear)', price: 10, limited: false },
+                { name: 'Hong Li', price: 15, limited: false },
+                { name: 'Yu Hong', price: 80, limited: true },
+                { name: 'Isadora', price: 10, limited: false },
+                { name: 'Jubileu 50', price: 10, limited: false },
+                { name: 'Kieffer', price: 8, limited: false },
+                { name: 'Kirchiza Winter', price: 12, limited: false },
+                { name: 'Korean Gigant', price: 20, limited: false },
+                { name: 'Kornelia', price: 10, limited: false },
+                { name: 'Latifa', price: 15, limited: false },
+                { name: 'La France', price: 15, limited: false },
+                { name: 'Löffelbirne', price: 15, limited: false },
+                { name: 'Erika', price: 15, limited: false },
+                { name: 'Flor D\'Inverno', price: 15, limited: false },
+                { name: 'Felinar Chinezesc', price: 70, limited: true },
+                { name: 'Fortune', price: 15, limited: false },
+                { name: 'Marguerite Marillat', price: 15, limited: false },
+                { name: 'Madame Beneford', price: 15, limited: false },
+                { name: 'Maria', price: 15, limited: false },
+                { name: 'Mavrodin Red', price: 10, limited: false },
+                { name: 'Mliivska Winter', price: 30, limited: true },
+                { name: 'Nitra', price: 15, limited: false },
+                { name: 'Novembra', price: 10, limited: false },
+                { name: 'Olivier de Serres', price: 15, limited: false },
+                { name: 'Pandora', price: 12, limited: false },
+                { name: 'Para lui Nita', price: 10, limited: false },
+                { name: 'Paradox', price: 12, limited: false },
+                { name: 'Piqa Boo', price: 60, limited: true },
+                { name: 'Graf Ditrich', price: 15, limited: false },
+                { name: 'Păr – Măr (New)', price: 20, limited: false },
+                { name: 'Patten', price: 15, limited: false },
+                { name: 'President Heron', price: 18, limited: false },
+                { name: 'Profesor Opoix', price: 15, limited: false },
+                { name: 'Rochet Muscat', price: 75, limited: true },
+                { name: 'Qtee', price: 15, limited: false },
+                { name: 'Reddy\'s Robin', price: 70, limited: true },
+                { name: 'Richard Peters', price: 15, limited: false },
+                { name: 'Saxonia Eckehart', price: 15, limited: false },
+                { name: 'Saxonia Elektra', price: 15, limited: false },
+                { name: 'Super Coloma', price: 15, limited: false },
+                { name: 'Shin Li (Asian Pear)', price: 15, limited: false },
+                { name: 'Soeur Grégoire', price: 15, limited: false },
+                { name: 'Super Comice Delb.', price: 20, limited: false },
+                { name: 'Talgar Beauty', price: 15, limited: false },
+                { name: 'Vasa', price: 15, limited: false },
+                { name: 'Vineland', price: 15, limited: false },
+                { name: 'Williams', price: 7, limited: false },
+                { name: 'UTA', price: 20, limited: false },
+                { name: 'Ya Li (Asiatic)', price: 15, limited: false },
+                { name: 'Zao Su Li (Asiatic)', price: 15, limited: false },
+                { name: 'Nakai', price: 12, limited: false },
+                { name: 'Jezira', price: 15, limited: false },
+                { name: 'Jeanne D\'Arc', price: 15, limited: true },
+                { name: 'President Mas', price: 15, limited: false },
+                { name: 'Milka', price: 18, limited: false },
+                { name: 'Colonel Machard', price: 15, limited: false },
+                { name: 'Vasarine Sviestine', price: 15, limited: false },
+                { name: 'Pamjat Zhegalova', price: 15, limited: false },
+                { name: 'Urbaniste', price: 15, limited: false },
+                { name: 'Potomac', price: 18, limited: false },
+                { name: 'Fondante Thirrion', price: 15, limited: false }
+            ],
+            mere: [
+                { name: 'Alkmène', price: 15, limited: false },
+                { name: 'Afrodita (New)', price: 20, limited: false },
+                { name: 'Andera', price: 15, limited: false },
+                { name: 'Ariane', price: 12, limited: false },
+                { name: 'Bionda® Marilyn', price: 15, limited: false },
+                { name: 'Bionda® Patrizia', price: 15, limited: false },
+                { name: 'Crimson Snow', price: 30, limited: true },
+                { name: 'Corealor', price: 15, limited: false },
+                { name: 'Dalinette', price: 15, limited: false },
+                { name: 'Daiane', price: 20, limited: false },
+                { name: 'Delbard Jubile', price: 15, limited: false },
+                { name: 'Delbard Celeste', price: 15, limited: false },
+                { name: 'Evelina', price: 15, limited: false },
+                { name: 'Early Fuji', price: 10, limited: false },
+                { name: 'Fuji Beni Shogun', price: 10, limited: false },
+                { name: 'Fuji FuCiv', price: 15, limited: false },
+                { name: 'Fuji Cufu', price: 15, limited: false },
+                { name: 'Gala Galaxy', price: 12, limited: false },
+                { name: 'Galiwa', price: 25, limited: true },
+                { name: 'Golden Reinders', price: 10, limited: false },
+                { name: 'Golden Orange', price: 15, limited: false },
+                { name: 'Holstein Cox', price: 15, limited: false },
+                { name: 'Kariot 7', price: 15, limited: false },
+                { name: 'King Roat (New)', price: 18, limited: false },
+                { name: 'Larisa', price: 15, limited: false },
+                { name: 'Oksana', price: 15, limited: false },
+                { name: 'Opal', price: 15, limited: false },
+                { name: 'Pinova', price: 10, limited: false },
+                { name: 'Primadela (New)', price: 15, limited: false },
+                { name: 'Red Falstaff', price: 15, limited: false },
+                { name: 'Red Topaz', price: 10, limited: false },
+                { name: 'Redlove Odysso', price: 12, limited: false },
+                { name: 'RedLove Cicle', price: 12, limited: false },
+                { name: 'RedLove Era', price: 12, limited: false },
+                { name: 'Remar', price: 12, limited: false },
+                { name: 'Rozela', price: 12, limited: false },
+                { name: 'Rubin Fuji', price: 15, limited: false },
+                { name: 'Scarlett O\'Hara', price: 20, limited: false },
+                { name: 'Smeralda (New)', price: 15, limited: false },
+                { name: 'Sweet Sixteen', price: 12, limited: false },
+                { name: 'Sirius', price: 12, limited: false },
+                { name: 'Story Inored', price: 15, limited: false },
+                { name: 'Valery', price: 10, limited: false },
+                { name: 'Gala Dark', price: 15, limited: true },
+                { name: 'Gala Shinco Red', price: 15, limited: false }
+            ],
+            prun: [
+                { name: 'August Delight', price: 10, limited: false },
+                { name: 'Andreea', price: 10, limited: false },
+                { name: 'BleFree', price: 12, limited: false },
+                { name: 'Cacanska Lepotica', price: 12, limited: false },
+                { name: 'Carpatin', price: 10, limited: false },
+                { name: 'Elena (Germania)', price: 10, limited: false },
+                { name: 'Elena (Romania)', price: 12, limited: false },
+                { name: 'Ente Blanche (New)', price: 20, limited: false },
+                { name: 'Fidelia (New)', price: 35, limited: true },
+                { name: 'Franzi (New)', price: 40, limited: true },
+                { name: 'Hanita', price: 12, limited: false },
+                { name: 'Hanka', price: 15, limited: false },
+                { name: 'Haganta', price: 15, limited: false },
+                { name: 'John Long (New)', price: 30, limited: true },
+                { name: 'Jofela', price: 15, limited: false },
+                { name: 'Joganta', price: 15, limited: false },
+                { name: 'Jubileul', price: 12, limited: false },
+                { name: 'Iulia', price: 12, limited: false },
+                { name: 'Ialomița', price: 10, limited: false },
+                { name: 'Prezenta', price: 12, limited: false },
+                { name: 'Record', price: 10, limited: false },
+                { name: 'Renglot Ulena', price: 10, limited: false },
+                { name: 'TopFirst Plus', price: 15, limited: false },
+                { name: 'Topend plus', price: 15, limited: false },
+                { name: 'Tophit plus', price: 12, limited: false },
+                { name: 'Topfive', price: 15, limited: false },
+                { name: 'Toptaste', price: 15, limited: false },
+                { name: 'Stanley', price: 5, limited: false },
+                { name: 'Zwikla', price: 10, limited: false },
+                { name: 'Opal (New)', price: 15, limited: false },
+                { name: 'Zlatka (New)', price: 15, limited: false },
+                { name: 'Quetsche Blanche de Létricourt (New)', price: 25, limited: true }
+            ],
+            cireș: [
+                { name: 'Amar de Maxtut', price: 12, limited: false },
+                { name: 'George', price: 8, limited: false },
+                { name: 'Stefan', price: 10, limited: false },
+                { name: 'Karina', price: 12, limited: false },
+                { name: 'Nimba', price: 15, limited: false },
+                { name: 'Negru Szomolya', price: 12, limited: false },
+                { name: 'Narana (New)', price: 18, limited: true },
+                { name: 'Anda (Galben)', price: 18, limited: false },
+                { name: 'Margo (Galben) (New)', price: 18, limited: true },
+                { name: 'Summit', price: 12, limited: false },
+                { name: 'Sweet Early (New)', price: 20, limited: true },
+                { name: 'Timpuriu de mai', price: 10, limited: false },
+                { name: 'Regina', price: 10, limited: false }
+            ],
+            dud: [
+                { name: 'Agate', price: 15, limited: false },
+                { name: 'Chirtout', price: 15, limited: false },
+                { name: 'Emmanuelle', price: 15, limited: false },
+                { name: 'Lebanese Heart', price: 15, limited: false },
+                { name: 'Lourd Georgeous', price: 15, limited: false },
+                { name: 'Pakistan', price: 15, limited: false },
+                { name: 'Pink', price: 15, limited: false },
+                { name: 'Sangue e latte', price: 15, limited: false },
+                { name: 'Shely 150', price: 15, limited: false },
+                { name: 'Wellington', price: 15, limited: false }
+            ],
+            cais: [
+                { name: 'Auras', price: 12, limited: false },
+                { name: 'Augustin', price: 12, limited: false },
+                { name: 'Somo', price: 15, limited: true },
+                { name: 'Rouge Cot', price: 20, limited: false },
+                { name: 'Totem', price: 15, limited: false }
+            ],
+            piersic: [
+                { name: 'Mimi', price: 12, limited: false },
+                { name: 'Minodora', price: 12, limited: false },
+                { name: 'Amalia', price: 12, limited: false },
+                { name: 'Sagittaria', price: 15, limited: false },
+                { name: 'Platitop', price: 15, limited: true },
+                { name: 'Sweet Scarlett', price: 18, limited: false }
+            ],
+            migdal: [
+                { name: 'Autofertil 1', price: 12, limited: false },
+                { name: 'Autofertil 2', price: 12, limited: false },
+                { name: 'Genco', price: 15, limited: false },
+                { name: 'Torino', price: 15, limited: false },
+                { name: 'Marinada', price: 20, limited: false },
+                { name: 'Vairo', price: 20, limited: false },
+                { name: 'Soleta', price: 20, limited: false }
+            ],
+            gutui: [
+                { name: 'Aurii', price: 10, limited: false },
+                { name: 'Rustic', price: 10, limited: false }
+            ],
+            musmon: [
+                { name: 'Musmon', price: 10, limited: false }
+            ]
+        };
+
+        const categoryIcons = {
+            păr: '🍐',
+            mere: '🍎',
+            prun: '🫐',
+            cireș: '🍒',
+            dud: '🫘',
+            cais: '🧡',
+            piersic: '🍑',
+            migdal: '🌰',
+            gutui: '💛',
+            musmon: '⚪'
+        };
+
+        // INIT
+        function initPage() {
+            renderCategories('all');
+            setupFilterButtons();
+        }
+
+        function setupFilterButtons() {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    const category = this.getAttribute('data-category');
+                    renderCategories(category);
+                });
+            });
+
+            // Handler pentru dropdown
+            const dropdown = document.getElementById('categorySelect');
+            if (dropdown) {
+                dropdown.addEventListener('change', function() {
+                    const category = this.value;
+                    // Actualizeaza button-ul activ pe desktop
+                    document.querySelectorAll('.filter-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                        if (btn.getAttribute('data-category') === category) {
+                            btn.classList.add('active');
+                        }
+                    });
+                    renderCategories(category);
+                });
+            }
+        }
+
+        function renderCategories(selectedCategory) {
+            const container = document.getElementById('categoriesContainer');
+            container.innerHTML = '';
+
+            const categoriesToShow = selectedCategory === 'all' ? Object.keys(data) : [selectedCategory];
+
+            categoriesToShow.forEach(category => {
+                const varieties = data[category];
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'category active';
+
+                let categoryHTML = `
+                    <div class="category-header">
+                        <div class="category-icon">${categoryIcons[category]}</div>
+                        <h2>${category.charAt(0).toUpperCase() + category.slice(1)}</h2>
+                        <div class="variety-count">${varieties.length} soiuri</div>
+                    </div>
+                    <div class="varieties-grid">
+                `;
+
+                varieties.forEach(variety => {
+                    categoryHTML += `
+                        <div class="variety-card">
+                            <div class="variety-name">${variety.name}</div>
+                            <div class="variety-price">
+                                ${variety.price} lei
+                                <span class="variety-price-unit">per ramură</span>
+                            </div>
+                            ${variety.limited ? '<span class="stock-limited">⚠️ Stoc limitat</span>' : ''}
+                        </div>
+                    `;
+                });
+
+                categoryHTML += `</div>`;
+                categoryDiv.innerHTML = categoryHTML;
+                container.appendChild(categoryDiv);
+            });
+        }
+
+        // LAUNCH
+        document.addEventListener('DOMContentLoaded', initPage);
+    </script>
+</body>
+</html>
